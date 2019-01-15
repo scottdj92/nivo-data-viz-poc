@@ -1,35 +1,16 @@
 import React from "react";
 import { render } from "react-dom";
-import { ResponsiveHeatMapCanvas } from "@nivo/heatmap";
-import { food } from "./data/food";
-import { people } from "./data/people";
-import { ResponsiveSankey } from "@nivo/sankey";
-import styled from "@emotion/styled";
-
-const Wrapper = styled.div({
-    height: "800px",
-});
+import HeatMapLegend from "./heatmap-legend";
+import { DragDropContextProvider } from "react-dnd";
+import HTML5BackEnd from "react-dnd-html5-backend";
+import HeatMap from "./heatmap";
 
 const App = () => (
-    <Wrapper>
-        <ResponsiveHeatMapCanvas data={food}
-            keys={[
-                "hot dog",
-                "burger",
-                "sandwich",
-                "kebab",
-                "fries",
-                "donut",
-                "junk",
-                "sushi",
-                "ramen",
-                "curry",
-                "udon",
-            ]}
-            indexBy="country"
-        />
-        <ResponsiveSankey data={people} />
-    </Wrapper>
+    <DragDropContextProvider backend={HTML5BackEnd}>
+        <HeatMap />
+        <HeatMapLegend />
+        {/* <ResponsiveSankey data={people} /> */}
+    </DragDropContextProvider>
 );
 
 render(<App />, document.getElementById("app"));
